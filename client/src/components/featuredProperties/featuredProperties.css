@@ -1,6 +1,5 @@
 .fp {
-  width: 100%;
-  max-width: 1024px;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -43,4 +42,16 @@
 
 .fpRating>span{
   font-size: 14px;
+}
+
+
+@media only screen and (max-width: 800px){
+  .fp{
+    flex-direction: column;
+  }
+
+
+  .featuredItem{
+    margin-bottom: 20px;
+  }
 }

@@ -1,6 +1,5 @@
 .featured{
-  width: 100%;
-  max-width: 1024px;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -26,4 +25,16 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
+}
+
+/* if window size is less then 600 img change to column */
+@media only screen and (max-width: 800px){
+  .featured{
+    flex-direction: column;
+  }
+
+
+  .featuredItem{
+    margin-bottom: 20px;
+  }
 }

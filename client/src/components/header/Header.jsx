@@ -46,6 +46,10 @@ const Header = ({ type }) => {
     });
   };
 
+  function handleSignIn(){
+    navigate("/login")
+  }
+
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
@@ -55,43 +59,22 @@ const Header = ({ type }) => {
 
   return (
     <div className="header">
+      <img src="https://images.pexels.com/photos/2962066/pexels-photo-2962066.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="headerImg" />
       <div
         className={
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
-          </div>
-        </div>
         {type !== "list" && (
           <>
             <h1 className="headerTitle">
-              A lifetime of discounts? It's Genius.
+              Let's Book a Hotel
             </h1>
             <p className="headerDesc">
-              Get rewarded for your travels – unlock instant savings of 10% or
-              more with a free Lamabooking account
+              This is a simple hotel booking app, where you can book a hotel
+
             </p>
-            {!user.otherDetails.username && <button className="headerBtn">Sign in / Register</button>}
+        
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />

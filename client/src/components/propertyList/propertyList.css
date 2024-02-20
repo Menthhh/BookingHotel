@@ -1,6 +1,5 @@
 .pList{
-  width: 100%;
-  max-width: 1024px;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -28,4 +27,15 @@
 .pListTitles>h2{
   font-size: 14px;
   font-weight: 300;
+}
+
+@media only screen and (max-width: 800px){
+  .pList{
+    flex-direction: column;
+  }
+
+
+  .featuredItem{
+    margin-bottom: 20px;
+  }
 }
