@@ -4,7 +4,7 @@ import Header from "../../components/header/Header";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -14,6 +14,8 @@ import {
 import { useContext,useState } from "react";
 import useFetch from "../../hooks/useFetch.js"
 import { SearchContext } from "../../context/SearchContext.js"
+import { AuthContext } from "../../context/AuthContext.js";
+import Reserve from "../../components/reserve/Reserve.jsx";
 
 
 const Hotel = () => {
@@ -21,6 +23,7 @@ const Hotel = () => {
   const id = location.pathname.split("/")[2];
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   const { dates, options } = useContext(SearchContext);
 
@@ -31,9 +34,9 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate)
-
-  console.log(dates)
+  const days = dates && dates[0] ? dayDifference(dates[0].endDate, dates[0].startDate) : 0;
+  const {user} = useContext(AuthContext)
+  const navigate = useNavigate();
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -68,9 +71,16 @@ const Hotel = () => {
     } else {
       newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
     }
-
     setSlideNumber(newSlideNumber);
   };
+
+  const handleClick =()=>{
+    if(user){
+      setOpenModal(true)
+    }else{
+      navigate("/login")
+    }
+  }
 
   return (
     <div>
@@ -149,7 +159,7 @@ const Hotel = () => {
                   <h2>
                     <b>{days *  data.cheapestPrice * options.room} {days} nights</b> (9 nights)
                   </h2>
-                  <button>Reserve or Book Now!</button>
+                  <button onClick={handleClick}>Reserve or Book Now!</button>
                 </div>
               </div>
             </div>
@@ -158,6 +168,7 @@ const Hotel = () => {
           </div>
         </>
       )}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
     </div>
   );
 };

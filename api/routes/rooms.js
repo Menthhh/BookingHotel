@@ -5,7 +5,8 @@ import {
     deleteRoom,
     getAllRooms,
     getRoom,
-    updateRoom
+    updateRoom,
+    updateRoomAvailability
 } from "../controllers/roomControl.js";
 
 const router = express.Router(); 
@@ -14,6 +15,7 @@ router.post("/:hotelid", verifyAdmin,createRoom);
 
 //update
 router.put("/:id", verifyAdmin,updateRoom);
+router.put("/availability/:id",updateRoomAvailability );
 
 //Read
 router.get("/find/:id",getRoom);
